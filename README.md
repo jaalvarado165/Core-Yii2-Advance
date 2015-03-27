@@ -82,3 +82,5 @@ This core has already install the kartik extensions, doamigos extensions and jui
 Into the frontend application, the uploads directory is `/path/to/yii-application/frontend/web/uploads` 
 
 Before of use composer, you should execute php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
+
+For access to GII Module, you should enter to /path/to/yii-application/frontend/web/index.php?r=gii
