@@ -40,10 +40,10 @@ return [
             'viewPath' => '@common/mail',
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'mail.interserviciosltda.net',
-                'username' => 'julianalvarado@interserviciosltda.net',
-                'password' => 'JTC*?Jg;k)wy',
-                'port' => '587',
+                'host' => '',
+                'username' => '',
+                'password' => '',
+                'port' => '',
                 'encryption' => 'tls',
             ],
             // send all mails to a file by default. You have to set
