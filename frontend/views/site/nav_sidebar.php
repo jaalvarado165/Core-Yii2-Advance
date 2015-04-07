@@ -22,6 +22,20 @@ echo SideNav::widget([
             'visible' => (!Yii::$app->user->isGuest && Yii::$app->authManager->checkAccess(Yii::$app->user->getId(), 'user'))
         ],
         [
+            'label' => \Yii::t('app', 'Configuración'),
+            'icon' => 'cog',
+            'items' => [
+                [
+                    'label' => \Yii::t('app', 'Cambiar Clave'), 'icon' => 'pencil',
+                    'url' => ['/site/configuration_pass', 'action' => 'pass'],
+                ],
+                [
+                    'label' => \Yii::t('app', 'Cambiar Correo'), 'icon' => 'pencil',
+                    'url' => ['/site/configuration_user', 'action' => 'user'],
+                ],
+            ],
+        ],
+        [
             'label' => \Yii::t('app', 'Ayuda'),
             'icon' => 'question-sign',
         ],

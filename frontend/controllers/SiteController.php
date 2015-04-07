@@ -14,6 +14,7 @@ use frontend\models\InfoTestForm;
 use frontend\models\StorageForm;
 use frontend\models\ContactForm;
 use frontend\models\InfoSearch;
+use frontend\models\ConfigurationForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -55,7 +56,7 @@ class SiteController extends Controller {
 //                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'dashboard', 'infoup', 'updateinfo', 'deleteinfo', 'mediafiles', 'deletemediafile'],
+                        'actions' => ['logout', 'dashboard', 'infoup', 'updateinfo', 'deleteinfo', 'mediafiles', 'deletemediafile', 'configuration_pass', 'configuration_user'],
                         'allow' => true,
                         'roles' => ['user', 'administrator'],
                     ],
@@ -236,11 +237,11 @@ class SiteController extends Controller {
 
                 $user = User::findOne(['id' => Yii::$app->user->getId()]);
 
-                \Yii::$app->mailer->compose(['html' => 'info-html', 'text' => 'info-text'], ['user' => $user, 'info' => $info])
-                        ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name])
-                        ->setTo($user->email)
-                        ->setSubject(\Yii::t('app', 'Información Agregada'))
-                        ->send();
+//                \Yii::$app->mailer->compose(['html' => 'info-html', 'text' => 'info-text'], ['user' => $user, 'info' => $info])
+//                        ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name])
+//                        ->setTo($user->email)
+//                        ->setSubject(\Yii::t('app', 'Información Agregada'))
+//                        ->send();
 
                 Yii::$app->session->setFlash('success', \Yii::t('app', 'Información agregada exitosamente'));
                 return $this->redirect(['site/infoup']);
@@ -475,5 +476,59 @@ class SiteController extends Controller {
 
         return $this->redirect(['mediafiles']);
     }
+    
+    
+    public function actionConfiguration_pass() {
+
+        if (isset($_GET['lang'])) {
+
+            Yii::$app->session->set('lang', $_GET['lang']);
+            Yii::$app->language = Yii::$app->session->get('lang');
+        }
+
+        $model = new ConfigurationForm();
+        $model->scenario = 'password';
+
+        //dumpx($_POST);
+        if ($model->load(Yii::$app->request->post()) && $configuration = $model->configurationup()) {
+            //upload profile photo
+            Yii::$app->session->setFlash('success', \Yii::t('app', 'Datos actualizados exitosamente'));
+
+            return $this->refresh();
+        } else {
+
+            return $this->render('configuration', [
+                        'model' => $model,
+                        'action' => 'pass'
+            ]);
+        }
+    }
+    
+    public function actionConfiguration_user() {
+
+        if (isset($_GET['lang'])) {
+
+            Yii::$app->session->set('lang', $_GET['lang']);
+            Yii::$app->language = Yii::$app->session->get('lang');
+        }
+
+        $model = new ConfigurationForm();
+        $model->scenario = 'username';
+
+
+        if ($model->load(Yii::$app->request->post()) && $configuration = $model->configurationup()) {
+            //upload profile photo
+            Yii::$app->session->setFlash('success', \Yii::t('app', 'Datos actualizados exitosamente'));
+
+            return $this->refresh();
+        } else {
+
+            return $this->render('configuration', [
+                        'model' => $model,
+                        'action' => 'user'
+            ]);
+        }
+    }
+    
 
 }

@@ -58,7 +58,15 @@ return [
     'Si olvidó su clave usted puede' => 'If you forgot your password you can',
     'Por favor llene los siguientes campos para loguearse:' => 'Please fill out the following fields to login:',
     'Nombre Usuario o Email' => 'Username or Email',
-    'Foto borrada exitosamente' => 'Photo deleted successfully'
+    'Foto borrada exitosamente' => 'Photo deleted successfully',
+    'Configuración' => 'Configuration',
+    'Nueva Clave' => 'New Password',
+    'Repetir Nueva Clave' => 'Repeat New Password',
+    'Cambiar Clave' => 'Change Password',
+    'Cambiar Correo' => 'Change Email',
+    'Nuevo Correo' => 'New Email',
+    'Repetir Nuevo Correo' => 'Repeat New Email',
+    'Datos actualizados exitosamente' => 'Info updated successfully'
     
 ];
 

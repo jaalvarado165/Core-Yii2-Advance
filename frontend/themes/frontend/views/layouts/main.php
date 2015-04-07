@@ -51,8 +51,18 @@ $this->title = \Yii::t('app', 'Frontend');
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
-            
-            $menuItems[] = ['label' => Yii::$app->language=="es" ? 'English': 'Español', 'url' => [Yii::$app->controller->action->id, 'lang'=>Yii::$app->language=="es"? "en-US": "es"]];
+            if(isset($_GET['action'])) {
+                $menuItems[] = [
+                    'label' => Yii::$app->language=="es" ? 'English': 'Español', 'url' => [Yii::$app->controller->action->id, 'lang'=>Yii::$app->language=="es"? "en-US": "es", 'action'=>$_GET['action']]
+                ];
+            }
+            elseif(isset($_GET['id'])) {
+                $menuItems[] = [
+                    'label' => Yii::$app->language=="es" ? 'English': 'Español', 'url' => [Yii::$app->controller->action->id, 'lang'=>Yii::$app->language=="es"? "en-US": "es", 'id'=>$_GET['id']]
+                ];
+            } else {
+                $menuItems[] = ['label' => Yii::$app->language=="es" ? 'English': 'Español', 'url' => [Yii::$app->controller->action->id, 'lang'=>Yii::$app->language=="es"? "en-US": "es"]];
+            }
             
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
