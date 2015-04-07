@@ -10,6 +10,8 @@ is a separate Yii application.
 The template is designed to work in a team development environment. It supports
 deploying the application in different environments.
 
+The core application containt I18N, RBAC, users module, sidebar (frontend), modal form, configuration section (set password and email) and more.
+
 
 DIRECTORY STRUCTURE
 -------------------
