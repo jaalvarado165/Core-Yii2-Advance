@@ -1,22 +1,22 @@
 <?php
-
 namespace backend\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use common\models\LoginForm;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use common\models\LoginForm;
 
 /**
  * Site controller
  */
-class SiteController extends Controller {
-
+class SiteController extends Controller
+{
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -44,66 +44,55 @@ class SiteController extends Controller {
     /**
      * @inheritdoc
      */
-    public function actions() {
+    public function actions()
+    {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
     }
-    
-    public function beforeAction($action) {
-        if (Yii::$app->session->has('lang')) {
-            Yii::$app->language = Yii::$app->session->get('lang');
-        } else {
-            //or you may want to set lang session, this is just a sample
-            Yii::$app->language = 'es';
-        }
-        return parent::beforeAction($action);
-    }
-    
-    public function actionIndex() {
-        
-        if (isset($_GET['lang'])) {
 
-            Yii::$app->session->set('lang', $_GET['lang']);
-            Yii::$app->language = Yii::$app->session->get('lang');
-        }
-        
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionIndex()
+    {
         return $this->render('index');
     }
 
-    public function actionLogin() {
-        
-        if (isset($_GET['lang'])) {
-
-            Yii::$app->session->set('lang', $_GET['lang']);
-            Yii::$app->language = Yii::$app->session->get('lang');
-        }
-        
-        if (!\Yii::$app->user->isGuest) {
+    /**
+     * Login action.
+     *
+     * @return string
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (Yii::$app->authManager->checkAccess(Yii::$app->user->getId(), 'administrator')) {
-                return $this->goBack();
-            } else {
-                Yii::$app->user->logout();
-                return $this->goHome();
-            }
+            return $this->goBack();
         } else {
             return $this->render('login', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
 
-    public function actionLogout() {
+    /**
+     * Logout action.
+     *
+     * @return string
+     */
+    public function actionLogout()
+    {
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
-
 }

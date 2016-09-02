@@ -27,35 +27,9 @@ body {
 }
 
 .jumbotron .btn {
-    font-size: 24px;
+    font-size: 21px;
     padding: 14px 24px;
 }
-
-.jumbotron2 {
-    text-align: center;
-    background-color: transparent;
-    float: left;
-    width: 46%;
-    padding: 30px 15px;
-margin: 20px;
-color: inherit;
-background-color: #EEE;
-}
-
-.jumbotron2 .btn {
-    font-size: 24px;
-   // padding: 14px 24px;
-}
-
-.jumbotron2 h1 {
-    font-size: 63px;
-}
-
-.jumbotron2 p {
-    font-size: 21px;
-font-weight: 200;
-}
-
 
 .not-set {
     color: #c55;
@@ -75,11 +49,11 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    content: /*"\e113"*/ "\e151";
+    content: "\e151";
 }
 
 a.desc:after {
-    content: /*"\e114"*/ "\e152";
+    content: "\e152";
 }
 
 .sort-numerical a.asc:after {
@@ -98,8 +72,13 @@ a.desc:after {
     content: "\e156";
 }
 
-.grid-view th {
+.grid-view td {
     white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
 }
 
 .hint-block {
@@ -116,17 +95,17 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
-
-.img_others {
-    display: inline-block;
-    float: left;
-    margin: 3px;
-    width: 160px;
-    text-align: center;
+/* align the logout "link" (button in form) of the navbar */
+.nav > li > form {
+    padding: 8px;
 }
 
-.img_others img {
-    width: 160px;
-    height: 130px;
-    margin-bottom: 10px;
+@media(max-width:768px) {
+	.nav li > form {
+	    padding: 3px;
+	}
+}
+
+.nav > li > form > button:hover {
+    text-decoration: none;
 }

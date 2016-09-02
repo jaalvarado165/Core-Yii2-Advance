@@ -1,7 +1,7 @@
 {
     "name": "yiisoft/yii2-app-advanced",
-    "description": "Yii 2 Advanced Application Template",
-    "keywords": ["yii2", "framework", "advanced", "application template"],
+    "description": "Yii 2 Advanced Project Template",
+    "keywords": ["yii2", "framework", "advanced", "project template"],
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
@@ -12,15 +12,14 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "*",
+        "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "2amigos/yii2-date-picker-widget": "*",
-        "kartik-v/yii2-widget-select2": "*",
-        "kartik-v/yii2-widgets": "*"
+        "webvimark/module-user-management": "1.0.7",
+        "dmstr/yii2-adminlte-asset": "2.*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -36,5 +35,8 @@
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
+    },
+    "scripts": {
+        "post-install-cmd": "php init --env=Development --overwrite=n"
     }
 }

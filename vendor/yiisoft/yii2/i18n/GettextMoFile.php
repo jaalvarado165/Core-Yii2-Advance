@@ -79,7 +79,7 @@ class GettextMoFile extends GettextFile
 
         // revision
         $revision = $this->readInteger($fileHandle);
-        if ($revision != 0) {
+        if ($revision !== 0) {
             throw new Exception('Invalid MO file revision: ' . $revision . '.');
         }
 
@@ -109,8 +109,7 @@ class GettextMoFile extends GettextFile
             $separatorPosition = strpos($id, chr(4));
 
 
-            if (($context && $separatorPosition !== false && strncmp($id, $context, $separatorPosition) === 0) ||
-                (!$context && $separatorPosition === false)) {
+            if ((!$context && $separatorPosition === false) || ($context && $separatorPosition !== false && strncmp($id, $context, $separatorPosition) === 0)) {
                 if ($separatorPosition !== false) {
                     $id = substr($id, $separatorPosition+1);
                 }
